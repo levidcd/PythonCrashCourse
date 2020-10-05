@@ -38,18 +38,20 @@ class AlienInvasion:
             self._update_screen()
             # 每次循环时重绘屏幕
 
-
     def _check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    #
+                    self.ship.rect.x += 1
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
 
         pygame.display.flip()
-
 
 
 if __name__ == '__main__':
