@@ -3,11 +3,11 @@
 '''
 @File    :   alien_invasion.py
 @Time    :   2020/10/05 17:15:38
-@Author  :   
+@Author  :
 @Version :   1.0
-@Contact :   
-@WebSite :   
-@Desc    :          
+@Contact :
+@WebSite :
+@Desc    :
 '''
 # Start typing your code from here
 import sys
@@ -41,13 +41,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-                print(len(self.bullets))
-
+            self._update_bullets()
             self._update_screen()
             # 每次循环时重绘屏幕
 
@@ -81,6 +75,13 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
+    def _update_bullets(self):
+        self.bullets.update()
+
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+            print(len(self.bullets))
 
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
