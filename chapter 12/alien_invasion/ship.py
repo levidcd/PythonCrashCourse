@@ -16,6 +16,15 @@ class Ship(object):
         # 设定新飞船的位置
         self.rect.midbottom = self.screen_rect.midbottom
 
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self):
+        if self.moving_right:
+            self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
+
     def blitme(self):
         '''指定位置绘制飞船'''
         self.screen.blit(self.image, self.rect)
