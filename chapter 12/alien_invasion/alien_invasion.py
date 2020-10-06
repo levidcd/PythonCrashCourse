@@ -18,6 +18,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 
+
 class AlienInvasion:
     def __init__(self):
         pygame.init()
@@ -50,7 +51,16 @@ class AlienInvasion:
 
     def _creat_fleet(self):
         alien = Alien(self)
-        self.aliens.add(alien)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2*alien_width)
+        # // 整数除法
+        number_alien_x = available_space_x // (2*alien_width)
+
+        for alien_number in range(number_alien_x):
+            alien = Alien(self)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def _check_events(self):
         for event in pygame.event.get():
@@ -96,7 +106,7 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
-        
+
         pygame.display.flip()
 
 
