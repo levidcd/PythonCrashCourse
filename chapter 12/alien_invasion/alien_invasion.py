@@ -51,19 +51,27 @@ class AlienInvasion:
 
     def _creat_fleet(self):
         alien = Alien(self)
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         available_space_x = self.settings.screen_width - (2*alien_width)
         # // 整数除法
         number_alien_x = available_space_x // (2*alien_width)
 
-        for alien_number in range(number_alien_x):
-            self._creat_alien(alien_number)
+        ship_height = self.ship.rect.height
+        available_space_y = (self.settings.screen_height -
+                             (3 * alien_height) - ship_height)
 
-    def _creat_alien(self, alien_number):
+        number_rows = available_space_y // (2 * alien_height)
+
+        for row_number in range(number_rows):
+            for alien_number in range(number_alien_x):
+                self._creat_alien(alien_number, row_number)
+
+    def _creat_alien(self, alien_number, row_number):
         alien = Alien(self)
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
+        alien.rect.y = alien.rect.height + 2 * alien_height * row_number
         self.aliens.add(alien)
 
     def _check_events(self):
